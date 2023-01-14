@@ -1,6 +1,11 @@
 version: 2.1
+defaults: &defaults
+  docker:
+    - image: circleci/node:13.8.0
+  working_directory: ~/project
 
 commands:
+
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
@@ -34,8 +39,7 @@ commands:
             
 jobs:
   build-frontend:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -43,15 +47,16 @@ jobs:
       - run:
           name: Build front-end
           command: |
-            # Your code here
+            cd frontend
+            npm install
+            npm run build
             exit 1
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
 
   build-backend:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -59,44 +64,46 @@ jobs:
       - run:
           name: Back-end build
           command: |
-             # Your code here
-             exit 1
+              cd backend
+              npm install
+              npm run build
+              exit 1
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
 
   test-frontend:
-    docker:
-      # Docker image here
+    <<: *defaults
     steps:
-      # Checkout code from git
-      # Restore from cache
+      - checkout
+      - restore_cache: 
+          keys: [frontend-build]
       # Your job code here
                 
   test-backend:
-    docker:
-      # Docker image here
+    <<: *defaults
     steps:
-      # Checkout code from git
-      # Restore from cache
+      - checkout
+      - restore_cache:
+          keys: [backend-build]
       # Your job code here
             
   scan-frontend:
-    docker:
-      # Docker image here
+    <<: *defaults
     steps:
-      # Checkout code from git
-      # Restore from cache
+      - checkout
+      - restore_cache:
+          keys: [frontend-build]
       # Your job code here
 
   scan-backend:
-    docker:
-      # Docker image here
+    <<: *defaults
     steps:
-      # Checkout code from git
-      # Restore from cache
+      - checkout
+      - restore_cache:
+          keys: [backend-build]
       # Your job code here
-
+#--------------------------------------------------------------------------------------------------------------------------------------------
   deploy-infrastructure:
     docker:
       # Docker image here that supports AWS CLI
