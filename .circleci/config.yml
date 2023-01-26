@@ -3,7 +3,6 @@ defaults: &defaults
   docker:
     - image: cimg/node:13.8.0
   working_directory: ~/project
-
 orbs:
   slack: circleci/slack@4.12.1
 
