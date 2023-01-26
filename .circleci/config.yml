@@ -314,7 +314,7 @@ jobs:
 #             fi
   notify-on-sucsess:
     docker:
-      - cimg/node:13.8.0
+      - image: cimg/base
     steps:
     - salck/notify:
         event: pass
