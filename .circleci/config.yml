@@ -5,12 +5,12 @@ defaults: &defaults
   working_directory: ~/project
 
 orbs:
-  slack: circleci/slack@4.9.3
+  slack: circleci/slack@4.12.1
 
 commands:
   notify-on-failure:
     steps:
-     - salck/notify:
+     - slack/notify:
         event: fail
         channel: cicd-pipeline
         template: basic_fail_1
@@ -314,12 +314,11 @@ jobs:
 #             fi
   notify-on-sucsess:
     docker:
-      - image: cimg/base
+      - image: 'cimg/base:stable'
     steps:
-    - salck/notify:
+    - slack/notify:
         event: pass
-        channel: cicd-pipeline
-        template: success_tagged_deploy_1        
+        template: success_tagged_deploy_1       
 
 workflows:
   default:
