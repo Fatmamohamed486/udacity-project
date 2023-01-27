@@ -25,7 +25,7 @@ commands:
           sudo ./aws/install
 
   install-ansible:
-      steps:
+    steps:
       - run: 
           name: "install ansible"
           command: |
