@@ -24,8 +24,8 @@ commands:
           unzip awscliv2.zip
           sudo ./aws/install
 
-  install-ansible:
-    steps:
+    install-ansible:
+      steps:
       - run: 
           name: "install ansible"
           command: |
@@ -171,22 +171,23 @@ jobs:
 #--------------------------------------------------------------------------------------------------------------------------------------------
   deploy-infrastructure:
     docker:
-      - image: amazon/aws-cli
+      - image: cimg/base:stable
     steps:
-      # Checkout code from git
+      - checkout
+      - install-awscli
       - run:
           name: Ensure back-end infrastructure exists
           command: |
             aws cloudformation deploy \
-              --template-file project/.circleci/files/backend.yml \
+              --template-file .circleci/files/backend.yml \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
-              --tags project=udapeople 
+              --tags project=udapeople
       - run:
           name: Ensure front-end infrastructure exist
           command: |
             aws cloudformation deploy \
-              --template-file project/.circleci/files/frontend.yml \
+              --template-file .circleci/files/frontend.yml \
               --tags project="udapeople" \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFOLW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFOLW_ID:0:7}"  
@@ -197,8 +198,8 @@ jobs:
              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFOLW_ID:0:7}" \
              --query 'Reservation[*].instances[*].PublicIpAddress' \
              --output text)
-            echo BACKEND_PUBLIC_IP >> .ansible/inventory.txt
-            cat ansible/inventory.txt
+            echo BACKEND_PUBLIC_IP >> .circleci/ansible/inventory.txt
+            cat .circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:
@@ -337,7 +338,7 @@ jobs:
 #             fi
   notify-on-sucsess:
     docker:
-      - image: cimg/base
+      - image: cimg/base:stable
     steps:
     - slack/notify:
         event: pass
