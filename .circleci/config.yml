@@ -220,14 +220,10 @@ jobs:
       - install-awscli
       - install-ansible
       - add_ssh_keys:
-         fingerprints: [72:7d:4b:83:ed:8c:8a:73:17:2e:cd:b4:27:f3:91:03]
+          fingerprints: [72:7d:4b:83:ed:8c:8a:73:17:2e:cd:b4:27:f3:91:03]
       - attach_workspace:
          at: ~/
-      - run:
-          name: Install dependencies
-          command: |
-            # Your code here
-            exit 1
+         
       - run:
           name: Configure server
           command: |
@@ -235,6 +231,7 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
 
+      - notify-on-failure
       - destroy-environment     
 
 #   run-migrations:
@@ -391,8 +388,4 @@ workflows:
       #     requires: [cloudfront-update]
       - notify-on-sucsess:
           requires:
-            - test-frontend   
-            - test-backend
-            - scan-backend
-            - scan-frontend
-          
+            - configure-infrastructure
