@@ -4,10 +4,6 @@
     path: ~/backend-app
     state: directory
 
-- name: "change mode"
-  shell: |   
-    chmod +rwx artifact.tar.gz
-
 - name: "Unarchive backend files"
   unarchive:
     src: artifact.tar.gz
@@ -17,6 +13,7 @@
   shell: |
     cd ~/backend-app
     npm i
+    
 - name: "Executing Node app with PM2"
   shell: |
     cd ~/backend-app/dist
