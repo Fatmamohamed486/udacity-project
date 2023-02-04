@@ -318,7 +318,7 @@ jobs:
             cd backend
             npm install
       - run:
-          name: Package Backend
+          name: Package Backend and deploy
           command: |
             cd backend
             npm run build 
@@ -326,9 +326,6 @@ jobs:
             tar -C backend -czvf artifact.tar.gz .
             cp artifact.tar.gz .circleci/ansible/roles/deploy/files
             ls .circleci/ansible/roles/deploy/files
-      - run:
-          name: Deploy backend
-          command: |
             export TYPEORM_MIGRATIONS_DIR=./migrations
             export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
             export TYPEORM_MIGRATIONS=./migrations/*.ts
