@@ -299,13 +299,12 @@ jobs:
       - revert-migrations     
                     
   deploy-backend:
-    docker:
-      - image: cimg/base:stable
+    <<: *defaults
     steps:
       - checkout
       - install-awscli
       - install-ansible
-      - install_nodejs
+  # - install_nodejs
       - add_ssh_keys:
           fingerprints: [72:7d:4b:83:ed:8c:8a:73:17:2e:cd:b4:27:f3:91:03]
       - attach_workspace:
