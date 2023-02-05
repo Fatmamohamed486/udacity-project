@@ -317,6 +317,7 @@ jobs:
           command: |
             cd backend
             npm install
+            npm run build
       - run:
           name: Package Backend and deploy
           command: |
@@ -339,7 +340,7 @@ jobs:
 
   smoke-test:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/python:3.10
     steps:
       - checkout
       - install-awscli
