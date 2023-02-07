@@ -12,7 +12,7 @@
 - name: "Installing Node Dependencies"
   shell: |
     cd ~/backend-app
-    npm install --legacy-peer-deps 
+    npm install
 
 - name: "Executing Node app with PM2"
   args:
