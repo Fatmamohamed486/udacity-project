@@ -376,9 +376,9 @@ jobs:
               return 1
             fi 
 
-      # - notify-on-failure
-      # - destroy-environment
-      # - revert-migrations  
+      - notify-on-failure
+      - destroy-environment
+      - revert-migrations  
 
   cloudfront-update:
     docker:
