@@ -376,7 +376,7 @@ jobs:
               return 1
             fi 
 
-    #- notify-on-failure
+      - notify-on-failure
       - destroy-environment
       - revert-migrations  
 
