@@ -21,7 +21,9 @@
 
 #   register: execute_node
 - name: install ans start app
-  command:  pm2 start main.js
+  command:  |
+    pm2 start main.js
+    pm2 logs
   args:
     chdir: /home/ubuntu/backend-app/dist
   environment:
