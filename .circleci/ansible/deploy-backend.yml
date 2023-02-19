@@ -20,7 +20,7 @@
       - TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME')}}"
       - TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD')}}"
       - TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE')}}"
-      - TYPEORM_MIGRATIONS: ./migrations/*.js
+      - TYPEORM_MIGRATIONS: ./migrations/*{.ts,.js}
       - TYPEORM_MIGRATIONS_DIR: ./migrations
       - PORT: "{{ lookup('env', 'PORT')}}"
 
