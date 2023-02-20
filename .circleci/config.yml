@@ -262,7 +262,8 @@ jobs:
       - revert-migrations 
 
   deploy-frontend:
-    <<: *defaults
+    docker:
+      - image: cimg/base:stable
     steps:
       - checkout
       - install-awscli
