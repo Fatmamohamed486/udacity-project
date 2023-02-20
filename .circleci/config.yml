@@ -267,6 +267,7 @@ jobs:
     steps:
       - checkout
       - install-awscli
+      - install_nodejs
       - restore_cache:
           keys: [frontend-build]
       - run:
