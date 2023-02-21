@@ -1,0 +1,14 @@
+URL01:
+https://github.com/Fatmamohamed486/udacity-project
+
+URL02:
+http://udapeople-afac60f.s3-website.us-east-2.amazonaws.com/#/employees
+
+URL03:
+http://d15im2e8em52z3.cloudfront.net/index.html#/employees
+
+URL04:
+http://18.221.86.215:3030/api/status
+
+URL05:
+http://3.14.3.237:9090/targets
