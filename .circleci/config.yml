@@ -407,7 +407,6 @@ jobs:
       - destroy-environment
       - revert-migrations 
         
-
   cleanup:
     docker:
       - image: cimg/base:stable
@@ -440,7 +439,7 @@ jobs:
         event: pass
         channel: cicd-pipeline
         template: success_tagged_deploy_1 
-        
+      
 workflows:
   default:
     jobs:
@@ -476,4 +475,3 @@ workflows:
       - notify-on-sucsess:
           requires:
             - cleanup
-          
