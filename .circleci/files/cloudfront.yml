@@ -23,7 +23,7 @@ Resources:
           - DomainName: !Sub "udapeople-${WorkflowID}.s3.us-east-2.amazonaws.com"
             Id: webpage
             S3OriginConfig:
-              OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}"
+              OriginAccessIdentity: match-viewer
         Enabled: True
         DefaultRootObject: index.html
         DefaultCacheBehavior:
