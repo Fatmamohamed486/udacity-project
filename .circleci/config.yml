@@ -473,6 +473,4 @@ workflows:
       - cleanup:
           requires: [cloudfront-update]
       - notify-on-sucsess:
-          requires:
-    
-        - cleanup
+          requires: [cleanup]
