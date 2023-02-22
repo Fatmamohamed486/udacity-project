@@ -69,7 +69,7 @@ commands:
           name: Revert migrations
           when: on_fail
           command: |
-            SUCCESS=$(curl --insecure  https://kvdb.io/44yxW5WfcMbCXX8vCM268B/migration_<<parameters.Workflow-ID>>)
+            SUCCESS=$(curl --insecure  https://kvdb.io/44yxW5WfcMbCXX8vCM268B/migration_${CIRCLE_WORKFLOW_ID:0:7}
             if (( $SUCCESS == 1 ));
             then
               cd ~/project/backend
@@ -372,7 +372,7 @@ jobs:
             echo ${URL} 
             if curl ${URL} | grep "Welcome"
             then
-              exit 0
+              exit 1
             else
               exit 1
             fi 
